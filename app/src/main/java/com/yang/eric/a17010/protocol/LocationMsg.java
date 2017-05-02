@@ -1,6 +1,7 @@
 package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.MapsApplication;
+import com.yang.eric.a17010.protocol.beans.Position;
 import com.yang.eric.a17010.utils.TransformUtils;
 
 import java.util.ArrayList;

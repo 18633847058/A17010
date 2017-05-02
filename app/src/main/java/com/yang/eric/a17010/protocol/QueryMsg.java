@@ -27,9 +27,11 @@ public class QueryMsg {
     //校验和
     private byte checkNum;
 
-    public byte[] encode(byte dataType) {
+    public byte[] encode() {
         byte[] bytes = new byte[13];
         int index = 0;
+        bytes[index++] = type;
+        setNumber(MapsApplication.i);
         System.arraycopy(TransformUtils.intTobyte2(MapsApplication.i++), 0, bytes, index , 2);
         index += 2;
         bytes[index++] = dataType;

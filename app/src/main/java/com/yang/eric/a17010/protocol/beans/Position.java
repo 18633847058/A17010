@@ -1,9 +1,10 @@
-package com.yang.eric.a17010.protocol;
+package com.yang.eric.a17010.protocol.beans;
 
 import java.text.SimpleDateFormat;
 
 /**
  * Created by Yang on 2017/4/28.
+ * 定位信息
  */
 
 public class Position {

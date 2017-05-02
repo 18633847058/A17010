@@ -1,15 +1,19 @@
 package com.yang.eric.a17010.protocol;
 
-import com.yang.eric.a17010.MapsApplication;
+import com.yang.eric.a17010.utils.LogUtils;
 import com.yang.eric.a17010.utils.TransformUtils;
 
+import java.util.Arrays;
+
+import static com.yang.eric.a17010.utils.Constants.REQUEST_RESPONSE_DECODE;
+
 /**
- * Created by Yang on 2017/4/28.
+ * Created by Yang on 2017/5/2.
  */
 
-public class RequestMsg {
+public class RequestResponse {
     //协议号
-    private byte type = 0x05;
+    private byte type = (byte) 0x85;
     //序列号
     private int number;
     //数据类型
@@ -24,27 +28,30 @@ public class RequestMsg {
     private byte dataType;
     //数据页数  从1开始
     private int dataPage;
-    //每页数量
+    //本页数量
     private byte dateNumber;
+    //内容
+    private byte[] content;
     private byte checkNum;
 
-    public byte[] encode() {
-        byte[] bytes = new byte[8];
-        int index = 0;
-        bytes[index++] = type;
-        setNumber(MapsApplication.i);
-        System.arraycopy(TransformUtils.intTobyte2(MapsApplication.i++), 0, bytes, index , 2);
-        index += 2;
-        bytes[index++] = dataType;
-        System.arraycopy(TransformUtils.intTobyte2(getDataPage()), 0, bytes, index , 2);
-        index += 2;
-        bytes[index++] = dateNumber;
+    public boolean decode(byte[] bytes) {
+        boolean flag = false;
         for (int i = 0; i < bytes.length - 1; i++) {
             checkNum ^= bytes[i];
         }
-        bytes[8] = checkNum;
-        return bytes;
+        if (type == bytes[0] && checkNum == bytes[bytes.length - 1]) {
+            setDataType(bytes[3]);
+            setDataPage(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,4,6)));
+            setDateNumber(bytes[6]);
+            setContent(Arrays.copyOfRange(bytes,7,bytes.length - 1));
+            flag = true;
+            LogUtils.e(REQUEST_RESPONSE_DECODE, "decode success!");
+        } else {
+            LogUtils.e(REQUEST_RESPONSE_DECODE, "decode failed!");
+        }
+        return flag;
     }
+
     public byte getType() {
         return type;
     }
@@ -83,6 +90,14 @@ public class RequestMsg {
 
     public void setDateNumber(byte dateNumber) {
         this.dateNumber = dateNumber;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
     }
 
     public byte getCheckNum() {
