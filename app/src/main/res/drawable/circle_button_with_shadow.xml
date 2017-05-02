@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:bottom="0dp">
+        <bitmap android:src="@drawable/ic_qu_fab_shadow" />
+    </item>
+    
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <selector >
+            <item android:state_pressed="true">
+                <shape android:shape="oval">
+                    <corners android:radius="5dp" />
+                    <solid android:color="#EEEEEE" />
+                    <size
+                        android:width="16dp"
+                        android:height="16dp" />
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="oval">
+                    <corners android:radius="5dp" />
+                    <solid android:color="@android:color/white" />
+                    <size
+                        android:width="16dp"
+                        android:height="16dp" />
+                </shape>
+            </item>
+
+        </selector>
+    </item>
+
+</layer-list>

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7efef" >
+
+
+    <!-- map -->
+    <RelativeLayout
+        android:id="@+id/rl_zoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_tmc"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/circle_button_with_shadow"
+            android:contentDescription="@string/zoom_in"
+            android:src="@drawable/traffic_closed"/>
+
+        <ImageButton
+            android:id="@+id/btn_zoom_in"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/btn_tmc"
+            android:background="@drawable/circle_button_with_shadow"
+            android:contentDescription="@string/zoom_in"
+            android:src="@drawable/btn_zoom_in"/>
+
+        <ImageButton
+            android:id="@+id/btn_zoom_out"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/btn_zoom_in"
+            android:background="@drawable/circle_button_with_shadow"
+            android:contentDescription="@string/zoom_out"
+            android:src="@drawable/btn_zoom_out"/>
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btn_lock"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/rl_zoom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_button_with_shadow"
+        android:contentDescription="@string/viewpoint"
+        android:src="@drawable/ic_navigation"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <com.yang.eric.a17010.map.DemoMapView
+            android:id="@+id/nav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!-- 在线导航的导航信息 -->
+		<LinearLayout
+		     android:id="@+id/ll_count_information"
+		     android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:background="@android:color/black"
+		     android:layout_alignParentStart="true"
+             android:layout_alignParentTop="true"
+             android:gravity="center_horizontal"
+		     android:orientation="vertical">
+		    <TextView
+	                android:id="@+id/tv_count_length"
+	                android:layout_marginTop="5dp"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+                    android:textColor="@color/white_text"
+	                android:textSize="30sp"/>
+		    <TextView
+	                android:id="@+id/tv_count_time"
+	                android:layout_marginTop="5dp"
+	                android:layout_marginBottom="5dp"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+                    android:textColor="@color/white_text"
+	                android:textSize="30sp"/>
+		</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_online_expand_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Black"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_nav_space"
+                    android:layout_marginStart="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:singleLine="true"
+                    android:textColor="@color/white_text"
+                    android:textSize="20sp" />
+                 <ImageView
+                    android:layout_marginStart="3dp"
+	                android:id="@+id/imageButton1"
+	                android:layout_width="100dp"
+	                android:layout_height="100dp"
+	                android:background="@color/Black" />
+                 <TextView
+	                android:id="@+id/textState"
+	                android:layout_marginStart="3dp"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/white_text"
+	                android:textSize="15sp"
+	                android:text="@string/enter"/>
+
+                <TextView
+                    android:id="@+id/tv_nav_address"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:singleLine="true"
+                    android:text="最近目标距离"
+                    android:textColor="@color/white_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <!-- 导航距离进度条 -->
+
+            <ProgressBar
+                android:id="@+id/pb_nav_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="8dp"
+                android:max="10000000"
+                android:progress="0"
+                android:visibility="gone"
+                android:progressDrawable="@drawable/nav_progressbar_bg" />
+        </LinearLayout>
+        <!-- 离线导航的路口放大图 -->
+
+        <LinearLayout
+            android:id="@+id/ll_offline_expand_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/offline_expandView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/nav" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_route_operate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_nav_start"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:singleLine="true"
+                android:text="@string/navigation"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_test_start"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:singleLine="true"
+                android:text="@string/simulation"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_route_detail"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:singleLine="true"
+                android:text="@string/details"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_route_del"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:singleLine="true"
+                android:text="@string/delete"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_nav_operate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_nav_pause"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:text="@string/pause"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_nav_faster"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:text="@string/accelerate"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_nav_slower"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:text="@string/decelerate"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_nav_end"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:text="@string/end"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- span -->
+
+    <RelativeLayout
+        android:id="@+id/nav_span"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" 
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/nav_span1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_1_1"
+            android:layout_marginTop="10dp"
+            android:background="@color/white" >
+            <ImageView
+                android:id="@+id/btn_recommended"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_check_red" />
+
+            <TextView
+                android:id="@+id/tv_recommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/btn_recommended"
+                android:text="系统推荐"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btn_shortest"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/tv_recommended"
+                android:src="@drawable/ic_unchecked_red" />
+
+            <TextView
+                android:id="@+id/tv_shortest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@id/btn_shortest"
+                android:text="路线最短"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btn_fastest"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@id/tv_shortest"
+                android:src="@drawable/ic_unchecked_red" />
+
+            <TextView
+                android:id="@+id/tv_fastest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/btn_fastest"
+                android:text="用时最少"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btn_economic"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_unchecked_red" />
+
+            <TextView
+                android:id="@+id/tv_economic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/btn_economic"
+                android:text="花费最少"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btn_walk"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/tv_economic"
+                android:src="@drawable/ic_unchecked_red" />
+
+            <TextView
+                android:id="@+id/tv_walk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/btn_walk"
+                android:text="步行规划"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btn_congestion"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/tv_walk"
+                android:src="@mipmap/uncheck" />
+
+            <TextView
+                android:id="@+id/tv_congestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_recommended"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/btn_congestion"
+                android:text="规避拥堵"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/nav_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_1_1"
+            android:src="@drawable/line" />
+
+        <RelativeLayout
+            android:id="@+id/rl_1_1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <Button
+                android:id="@+id/btn_tran_change"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/btn_change_bg" />
+
+            <TextView
+                android:id="@+id/btn_loc"
+                android:layout_width="75dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/btn_bg"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="当前位置"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_start_place"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/btn_loc"
+                android:layout_toEndOf="@id/btn_tran_change"
+                android:background="@drawable/text_border_black"
+                android:editable="false"
+                android:hint="输入起点"
+                android:padding="4dp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/btn_search"
+                android:layout_width="75dp"
+                android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/btn_bg"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="算路"
+                android:textColor="@color/white_text"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/et_end_place"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/btn_search"
+                android:layout_toEndOf="@id/btn_tran_change"
+                android:background="@drawable/text_border_black"
+                android:editable="false"
+                android:hint="输入终点"
+                android:padding="4dp"
+                android:singleLine="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- listview -->
+    <RelativeLayout
+        android:id="@+id/nav_span21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff2f2f2"
+        android:visibility="gone" >
+
+        <ListView
+            android:id="@+id/nav_detail_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="40dp"
+            android:background="#fff2f2f2"
+            android:cacheColorHint="#00000000" />
+
+        <Button
+            android:id="@+id/btn_nav_list_cancel"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_bg"
+            android:text="返回导航"
+            android:textColor="@color/Black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

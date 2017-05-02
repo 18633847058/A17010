@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/ic_mail_black_24dp"
+        android:title="@string/title_message"/>
+
+    <item
+        android:id="@+id/navigation_dialog"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="@string/space"/>
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/ic_mine_black_24dp"
+        android:title="@string/title_mine"/>
+
+</menu>
