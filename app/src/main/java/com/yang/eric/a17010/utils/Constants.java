@@ -12,14 +12,15 @@ public class Constants {
     public static final String ISLOGIN = "is_login";
     public static final String IMEI = "IMEI";
     public static final String COM_YANG_ERIC_A17010_LOCAL_BROADCAST = "com.yang.eric.a17010.LOCAL_BROADCAST";
-    public static final String SERVER_IP = "192.168.1.109";
-    public static final String SERVER_PORT = "21998";
+    public static final String SERVER_IP = "192.168.1.210";
+    public static final String SERVER_PORT = "15001";
     public static final byte[] HEAD_BYTES = new byte[] { 0x78, 0x78 };
     public static final byte[] TAIL_BYTES = new byte[] { 0x0D, 0x0A };
 
     public static final String LOGIN_RESPONSE_DECODE = "LoginResponse decode";
     public static final String QUERY_RESPONSE_DECODE = "QueryResponse decode";
     public static final String REQUEST_RESPONSE_DECODE = "RequestResponse decode";
+    public static final String MESSAGE_DECODE = "Message decode";
 
     public static final String CHECK_COED = "check_code";
     public static final String USERNAME = "username";

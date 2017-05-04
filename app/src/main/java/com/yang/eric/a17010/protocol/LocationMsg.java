@@ -1,7 +1,7 @@
 package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.MapsApplication;
-import com.yang.eric.a17010.protocol.beans.Position;
+import com.yang.eric.a17010.protocol.config.Position;
 import com.yang.eric.a17010.utils.TransformUtils;
 
 import java.util.ArrayList;
@@ -68,8 +68,11 @@ public class LocationMsg {
         lists.add(byteNumber[0]);
         lists.add(byteNumber[1]);
         lists.add(dataType);
+        dataNumber = (byte) positions.size();
+        lists.add(dataNumber);
         for (Position p : positions) {
-            String[] s = p.getDate().split("=");
+            lists.add(p.getType());
+            String[] s = p.getDate().split("-");
             for (int i = 0; i < s.length; i++) {
                 lists.add(Byte.valueOf(s[i]));
             }

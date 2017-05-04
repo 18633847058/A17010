@@ -45,7 +45,7 @@ public class TcpClient {
              */
             socketClient.getHeartBeatHelper().setDefaultReceiveData(CharsetUtil.stringToData("HeartBeat", CharsetUtil.UTF_8));
             socketClient.getHeartBeatHelper().setHeartBeatInterval(20 * 1000); // 设置自动发送心跳包的间隔时长，单位毫秒
-            socketClient.getHeartBeatHelper().setSendHeartBeatEnabled(true); // 设置允许自动发送心跳包，此值默认为false
+            socketClient.getHeartBeatHelper().setSendHeartBeatEnabled(false); // 设置允许自动发送心跳包，此值默认为false
 
             /**
              * 设置包长度转换器

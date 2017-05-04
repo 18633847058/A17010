@@ -23,8 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         }
         if(!sp.getBoolean(Constants.ISLOGIN, false) &&
                 sp.getLong(Constants.CHECK_COED,0) == 0) {
-//            Intent intent = new Intent(this, LoginActivity.class);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
+//            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else {
             Intent intent = new Intent(this, MainActivity.class);

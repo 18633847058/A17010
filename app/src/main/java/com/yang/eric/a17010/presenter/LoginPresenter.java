@@ -38,11 +38,11 @@ public class LoginPresenter implements LoginContract.Presenter {
             view.showMessage("用户名、密码为空！", false);
             return false;
         } else {
-            if (username.length() > 16||username.length() < 8) {
+            if (username.length() > 16||username.length() < 1) {
                 view.showMessage("用户名长度出现问题!", false);
                 return false;
             }
-            if (password.length() > 16||password.length() < 8) {
+            if (password.length() > 16||password.length() < 1) {
                 view.showMessage("密码长度出现问题!", false);
                 return false;
             }
@@ -89,12 +89,12 @@ public class LoginPresenter implements LoginContract.Presenter {
                 LoginResponse response = new LoginResponse();
                 if (response.decode(message)) {
                     if (response.getResult() == 0) {
-//                        view.stopLoading();
+                        view.stopLoading();
                         uuid = response.getUUID();
                         saveCode();
                         sendAuth();
-//                        view.showMessage("登录成功!", false);
-//                        view.go2Main();
+                        view.showMessage("登录成功!", false);
+                        view.go2Main();
                     } else {
                         view.stopLoading();
                         view.showMessage("登录失败,账号密码错误!", false);

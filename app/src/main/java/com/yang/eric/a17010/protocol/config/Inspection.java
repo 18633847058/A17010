@@ -1,4 +1,4 @@
-package com.yang.eric.a17010.protocol.beans;
+package com.yang.eric.a17010.protocol.config;
 
 import com.yang.eric.a17010.utils.LogUtils;
 import com.yang.eric.a17010.utils.TransformUtils;

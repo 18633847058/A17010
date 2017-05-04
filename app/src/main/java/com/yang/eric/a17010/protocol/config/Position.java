@@ -1,4 +1,4 @@
-package com.yang.eric.a17010.protocol.beans;
+package com.yang.eric.a17010.protocol.config;
 
 import java.text.SimpleDateFormat;
 
@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 public class Position {
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss");
+    //ID
+    private long id;
     //未知类型
     private byte type;
     //年月日时分秒
@@ -69,5 +71,13 @@ public class Position {
 
     public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements SocketClientDele
     public void onDisconnected(SocketClient client) {
         LogUtils.e(TAG, "onDisconnected");
 //        showMessage("连接断开!", false);
+        stopLoading();
         Toast.makeText(this, "连接断开!", Toast.LENGTH_SHORT).show();
     }
 

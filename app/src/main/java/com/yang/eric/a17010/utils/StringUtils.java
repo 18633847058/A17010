@@ -23,9 +23,9 @@ public class StringUtils {
                     buf.append("0");
                 buf.append(Integer.toHexString(i));}
                 //32位加密
-//                return buf.toString();
+                return buf.toString();
                 // 16位的加密
-               return buf.toString().substring(8, 24);
+//              return buf.toString().substring(8, 24);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
                 return null;

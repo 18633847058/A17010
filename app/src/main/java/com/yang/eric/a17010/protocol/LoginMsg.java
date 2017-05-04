@@ -2,6 +2,8 @@ package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.utils.TransformUtils;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by Yang on 2017/4/18.
  */
@@ -23,9 +25,16 @@ public class LoginMsg{
         bytes[index++] = getType();
         bytes[index++] = 0x00;
         bytes[index++] = getNumber();
-        System.arraycopy(getID().getBytes(), 0, bytes, index , getID().getBytes().length);
+
+        byte[] arr = TransformUtils.hexStringToBytes(getID()) ;
+        System.arraycopy(arr, 0, bytes, index , arr.length);
         index += 16 ;
-        System.arraycopy(getUsername().getBytes(), 0, bytes, index , getUsername().getBytes().length);
+
+        try {
+            System.arraycopy(getUsername().getBytes("gb2312"), 0, bytes, index , getUsername().getBytes("gb2312").length);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         index += 16;
         System.arraycopy(getPassword().getBytes(), 0, bytes, index , getPassword().getBytes().length);
         index += 16;
