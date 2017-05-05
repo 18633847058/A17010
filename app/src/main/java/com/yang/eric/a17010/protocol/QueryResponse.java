@@ -28,6 +28,7 @@ public class QueryResponse {
             checkNum ^= bytes[i];
         }
         if (bytes.length == 16 && type == bytes[0] && checkNum == bytes[bytes.length - 1]) {
+            setNumber(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,1,3)));
             setDataType(bytes[3]);
             setIsUpdate(bytes[4]);
             setUUID(TransformUtils.byte8ToLong(Arrays.copyOfRange(bytes, 5, 13)));

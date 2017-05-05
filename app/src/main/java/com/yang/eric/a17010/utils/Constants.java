@@ -20,6 +20,7 @@ public class Constants {
     public static final String LOGIN_RESPONSE_DECODE = "LoginResponse decode";
     public static final String QUERY_RESPONSE_DECODE = "QueryResponse decode";
     public static final String REQUEST_RESPONSE_DECODE = "RequestResponse decode";
+    public static final String NEARBY_RESPONSE_DECODE = "NearbyResponse decode";
     public static final String MESSAGE_DECODE = "Message decode";
 
     public static final String CHECK_COED = "check_code";

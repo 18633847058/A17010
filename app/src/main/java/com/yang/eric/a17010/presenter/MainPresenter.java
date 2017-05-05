@@ -32,7 +32,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void sendAuth() {
         username = sharedPreferences.getString(Constants.USERNAME, "");
         uuid = sharedPreferences.getLong(Constants.CHECK_COED, 0);
-        if (username.isEmpty() && uuid != 0) {
+        if (!username.isEmpty() && uuid != 0) {
             AuthMsg authMsg = new AuthMsg();
             authMsg.setUsername(username);
             authMsg.setUUID(uuid);

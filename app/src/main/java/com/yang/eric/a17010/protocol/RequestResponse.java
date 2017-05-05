@@ -40,12 +40,18 @@ public class RequestResponse {
             checkNum ^= bytes[i];
         }
         if (type == bytes[0] && checkNum == bytes[bytes.length - 1]) {
-            setDataType(bytes[3]);
-            setDataPage(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,4,6)));
-            setDateNumber(bytes[6]);
-            setContent(Arrays.copyOfRange(bytes,7,bytes.length - 1));
-            flag = true;
-            LogUtils.e(REQUEST_RESPONSE_DECODE, "decode success!");
+            try {
+                setNumber(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,1,3)));
+                setDataType(bytes[3]);
+                setDataPage(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,4,6)));
+                setDateNumber(bytes[6]);
+                setContent(Arrays.copyOfRange(bytes,7,bytes.length - 1));
+                flag = true;
+                LogUtils.e(REQUEST_RESPONSE_DECODE, "decode success!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                LogUtils.e(REQUEST_RESPONSE_DECODE, "decode failed!" + e.toString());
+            }
         } else {
             LogUtils.e(REQUEST_RESPONSE_DECODE, "decode failed!");
         }

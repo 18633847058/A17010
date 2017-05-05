@@ -10,19 +10,19 @@
                 android:centerColor="#bbbbbb"
                 android:endColor="#d5d5d5"
                 android:startColor="#a9a09d" />
-            <corners android:radius="5dp" />
+            <corners android:radius="3dp" />
         </shape>
     </item>
 
     <!-- content -->
     <item
-        android:bottom="1dp"
-        android:top="1dp"
-        android:left="1dp"
-        android:right="1dp">
+        android:bottom="0.5dp"
+        android:top="0.5dp"
+        android:left="0.5dp"
+        android:right="0.5dp">
         <shape android:shape="rectangle" >
             <solid android:color="#FFFFFF" />
-            <corners android:radius="5dp" />
+            <corners android:radius="3dp" />
         </shape>
     </item>
 

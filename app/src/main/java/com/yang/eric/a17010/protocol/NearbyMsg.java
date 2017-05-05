@@ -24,7 +24,8 @@ public class NearbyMsg {
         byte[] bytes = new byte[16];
         int index = 0;
         bytes[index++] = type;
-        byte[] number = TransformUtils.intTobyte2(MapsApplication.i++);
+        setNumber(MapsApplication.i++);
+        byte[] number = TransformUtils.intTobyte2(getNumber());
         bytes[index++] = number[0];
         bytes[index++] = number[1];
         System.arraycopy(TransformUtils.intTobyte4(getLongitude()), 0, bytes, index , 4);
@@ -77,5 +78,13 @@ public class NearbyMsg {
 
     public void setCheckNum(byte checkNum) {
         this.checkNum = checkNum;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
