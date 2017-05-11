@@ -12,7 +12,5 @@ public interface BaseView<T> {
 
     void initViews(View view);
 
-    void setListener();
 
-    void removeListener();
 }

@@ -28,4 +28,14 @@
     <string name="accelerate">加速</string>
     <string name="decelerate">减速</string>
     <string name="end">结束</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty_info">短信列表为空</string>
+    <string name="action_search">搜索</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="send">发送</string>
+    <string name="edit_info">请输入</string>
+    <string name="new_message">新短信</string>
+    <string name="receiver">收件人</string>
+    <string name="contact">通讯录</string>
 </resources>

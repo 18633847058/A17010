@@ -24,7 +24,7 @@ public class MainPresenter implements MainContract.Presenter {
     public MainPresenter(MainContract.View view) {
         this.view = view;
         this.view.setPresenter(this);
-        this.sharedPreferences = MapsApplication.getApplication()
+        this.sharedPreferences = MapsApplication.getInstance()
                 .getSharedPreferences(Constants.SETTINGS, Context.MODE_PRIVATE);
     }
 

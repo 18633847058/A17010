@@ -3,7 +3,6 @@ package com.yang.eric.a17010.beans;
 /**
  * Created by Yang on 2017/4/12.
  */
-
 public class User {
 
     private String username;

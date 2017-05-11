@@ -3,7 +3,6 @@ package com.yang.eric.a17010.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,9 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapbar.map.Annotation;
-import com.mapbar.map.CustomAnnotation;
 import com.mapbar.map.MapRenderer;
-import com.mapbar.map.Vector2DF;
 import com.mapbar.mapdal.WmrObject;
 import com.mapbar.navi.NaviSession;
 import com.mapbar.navi.NaviSessionParams;
@@ -38,6 +35,8 @@ import com.yang.eric.a17010.map.Config;
 import com.yang.eric.a17010.map.DemoMapView;
 import com.yang.eric.a17010.ui.anim.AnimEndListener;
 import com.yang.eric.a17010.ui.anim.ViewAnimUtils;
+
+import java.util.List;
 
 
 public class MapsFragment extends Fragment implements View.OnClickListener, View.OnKeyListener, PoiQuery.EventHandler {
@@ -211,6 +210,15 @@ public class MapsFragment extends Fragment implements View.OnClickListener, View
                     btnZoomOut.setEnabled(b.getBoolean("zoomOut"));
                     btnZoomIn.setEnabled(b.getBoolean("zoomIn"));
                     break;
+                case 103:
+                    Bundle bundle = msg.getData();
+                    Annotation a = (Annotation) msg.obj;
+                    List<Annotation> list = mapView.getAnnotationsByClick(a.getPosition(),bundle.getFloat("z"));
+                    if (!list.isEmpty()) {
+                        for (Annotation a1:list) {
+                            Toast.makeText(getContext(), "周围存在气泡" + a1.getTitle(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
             }
         }
     };
@@ -232,11 +240,11 @@ public class MapsFragment extends Fragment implements View.OnClickListener, View
                 renderer.setWorldCenter(mapView.getCarPosition());
                 break;
             case R.id.btn_search:
-                Annotation annotation = new CustomAnnotation(2,new Point(11639999, 3990999),777,new Vector2DF(0.5f, 0.82f),
-                        BitmapFactory.decodeResource(getResources(), R.drawable.ic_place_red_400_24dp));
+                Annotation annotation = mapView.createAnnotation(new Point(11639999, 3990999), 1, R.drawable.ic_place_red_400_24dp, "车1");
                 mapView.addAnnotations(1,1,annotation);
-                Annotation annotation2 = new CustomAnnotation(2,new Point(11639000, 3990000),777,new Vector2DF(0.5f, 0.82f),
-                        BitmapFactory.decodeResource(getResources(), R.drawable.ic_place_red_400_24dp));
+                Annotation annotation3 = mapView.createAnnotation(new Point(11639999, 3990999), 1, R.drawable.ic_place_red_400_24dp, "车3");
+                mapView.addAnnotations(2,2,annotation3);
+                Annotation annotation2 = mapView.createAnnotation(new Point(11639000, 3990000), 2, R.drawable.ic_place_red_400_24dp, "车2");
                 mapView.addAnnotations(3,1,annotation2);
                 break;
             case R.id.btn_switch:

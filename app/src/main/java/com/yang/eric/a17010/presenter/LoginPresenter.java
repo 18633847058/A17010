@@ -27,7 +27,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public LoginPresenter(LoginContract.View view) {
         this.view = view;
         this.view.setPresenter(this);
-        this.sharedPreferences = MapsApplication.getApplication()
+        this.sharedPreferences = MapsApplication.getInstance()
                 .getSharedPreferences(Constants.SETTINGS, Context.MODE_PRIVATE);
     }
 
@@ -52,7 +52,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String username, String password) {
-        if (!NetworkState.networkConnected(MapsApplication.getApplication())) {
+        if (!NetworkState.networkConnected(MapsApplication.getInstance())) {
             view.showMessage("无法连接到网络!", false);
             return;
         }

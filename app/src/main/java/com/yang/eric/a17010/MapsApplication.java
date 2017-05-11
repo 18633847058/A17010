@@ -1,10 +1,13 @@
 package com.yang.eric.a17010;
 
 import android.app.Application;
-import android.content.Context;
 
+import com.yang.eric.a17010.greendao.gen.DaoMaster;
+import com.yang.eric.a17010.greendao.gen.DaoSession;
 import com.yang.eric.a17010.utils.LogUtils;
 import com.yang.eric.a17010.utils.TcpClient;
+
+import org.greenrobot.greendao.database.Database;
 
 /**
  * Created by Yang on 2017/4/10.
@@ -12,19 +15,32 @@ import com.yang.eric.a17010.utils.TcpClient;
 
 public class MapsApplication extends Application {
 
-    private static Context context;
+    private static MapsApplication instance;
     private static TcpClient client;
     public static int i = 2;
+
+    public static final boolean ENCRYPTED = true;
+    private DaoSession daoSession;
+
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-        context = this;
+        instance = this;
         LogUtils.debug(true);
+
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,  ENCRYPTED ? "a17010-db-encrypted" : "a17010-db");
+        Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
+        daoSession = new DaoMaster(db).newSession();
 	}
 
-	public static Context getApplication() {
-        return context;
+    public DaoSession getDaoSession() {
+        return daoSession;
+    }
+
+	public static MapsApplication getInstance() {
+        return instance;
     }
 
     public static TcpClient getClient() {
@@ -33,4 +49,5 @@ public class MapsApplication extends Application {
         }
         return client;
     }
+
 }

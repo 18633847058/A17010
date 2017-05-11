@@ -47,8 +47,10 @@ import com.mapbar.navi.RouteCollection;
 import com.mapbar.navi.RoutePlan;
 import com.yang.eric.a17010.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -242,6 +244,18 @@ public class DemoMapView extends MapView {
             }
         }
     }
+    public List<Annotation> getAnnotationsByClick(Point click,float z) {
+        List<Annotation> list = new ArrayList<>();
+        Iterator<Map.Entry<MarkerType,Annotation>> ite = annotations.entrySet().iterator();
+        while(ite.hasNext()){
+            Map.Entry<MarkerType, Annotation> entry = ite.next();
+            Point p = entry.getValue().getPosition();
+            if(Math.abs(click.x - p.x) < z && Math.abs(click.y - p.y) < z ){
+               list.add(entry.getValue());
+            }
+        }
+        return list;
+    }
 
 
 	public boolean isInited() {
@@ -338,6 +352,20 @@ public class DemoMapView extends MapView {
 		}
 	}
 
+	public Annotation createAnnotation(Point p, int annotationId, int drawableId, String title){
+        // 添加点击气泡
+        Annotation annotation = new CustomAnnotation(2,p,
+                // 此参数为气泡id 不能重复
+                annotationId,new Vector2DF(0.5f, 0.82f),
+                BitmapFactory.decodeResource(getResources(),drawableId));
+        CalloutStyle calloutStyle = annotation.getCalloutStyle();
+        calloutStyle.anchor.set(0.5f, 0.0f);
+        calloutStyle.leftIcon = 101;
+        calloutStyle.rightIcon = 1001;
+        annotation.setTitle(title);
+        annotation.setCalloutStyle(calloutStyle);
+        return annotation;
+    }
 	/**
 	 * 初始化放大图绘制使用的view
 	 * 
@@ -512,6 +540,7 @@ public class DemoMapView extends MapView {
 		}
 	}
 
+
 	/**
 	 * 点击气泡
      * 弹出气泡的点击事件处理
@@ -548,16 +577,30 @@ public class DemoMapView extends MapView {
 			if (mHandler != null) {
 				mHandler.sendMessage(msg);
 			}
-			// hiddenAnnotation(annot);
+            annot.showCallout(false);
 			break;
 		case Annotation.Area.none:
 		case Annotation.Area.icon:
-            Log.e("", "onAnnotationClicked: " +  "1111111111");
+            float meter = pixel2Meter(40);
+            float z = meter/30/3600;
+            //气泡
+            msg.what = 103;
+            Bundle bundle = msg.getData();
+            bundle.putFloat("z",z);
+            msg.obj = annot;
+            if (mHandler != null) {
+                mHandler.sendMessage(msg);
+            }
             break;
             default:
 			break;
 		}
 	}
+    private float pixel2Meter(int pixel) {
+	    int pixelPer1000 = mRenderer.meter2Pixel(1000);
+        float f = 1000/pixelPer1000;
+        return  f*pixel;
+    }
 
 	/**
 	 * 选择icon

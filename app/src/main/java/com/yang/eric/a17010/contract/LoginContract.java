@@ -35,5 +35,9 @@ public interface LoginContract {
 
         void go2Main();
 
+        void setListener();
+
+        void removeListener();
+
     }
 }

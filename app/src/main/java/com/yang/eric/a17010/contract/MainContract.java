@@ -27,5 +27,8 @@ public interface MainContract {
 
         void go2Login();
 
+        void setListener();
+
+        void removeListener();
     }
 }

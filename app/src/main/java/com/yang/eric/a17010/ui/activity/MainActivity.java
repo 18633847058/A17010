@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements SocketClientDeleg
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_message:
+                        go2Message();
                         return true;
                     case R.id.navigation_dialog:
                         showPop();
@@ -210,6 +211,12 @@ public class MainActivity extends AppCompatActivity implements SocketClientDeleg
         this.finish();
     }
 
+    public void go2Message() {
+        Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
 
     @Override
     public void onConnected(SocketClient client) {
@@ -222,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements SocketClientDeleg
     public void onDisconnected(SocketClient client) {
         LogUtils.e(TAG, "onDisconnected");
         mapsFragment.setOffline();
-        client.connect();
+//        client.connect();
     }
 
     @Override
