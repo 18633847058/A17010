@@ -39,8 +39,8 @@ public class ConversationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             case ConversationsAdapter.TYPE_EMPTY:
                 return new EmptyViewHolder(inflater.inflate(R.layout.empty_layout,parent,false));
             case ConversationsAdapter.TYPE_NORMAL:
-                View view = inflater.inflate(R.layout.user_list_item_layout,parent,false);
-                return new ContactViewHolder(view,mListener);
+                View view = inflater.inflate(R.layout.item_conversation_layout,parent,false);
+                return new ConversationViewHolder(view,mListener);
         }
         return null;
     }
@@ -48,9 +48,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof ContactViewHolder) {
+        if (holder instanceof ConversationViewHolder) {
             String item = list.get(position);
-            ((ContactViewHolder) holder).tvTitle.setText(item);
+            ((ConversationViewHolder) holder).tvTitle.setText(item);
         } else if (holder instanceof EmptyViewHolder) {
             if (list.size() != 0) {
                 ((EmptyViewHolder) holder).tvTitle.setText("到底了!");
@@ -75,13 +75,13 @@ public class ConversationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.mListener = listener;
     }
 
-    public class ContactViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener {
+    public class ConversationViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener {
 
         TextView tvTitle;
 
         OnRecyclerViewOnClickListener listener;
 
-        public ContactViewHolder(View itemView, OnRecyclerViewOnClickListener listener) {
+        public ConversationViewHolder(View itemView, OnRecyclerViewOnClickListener listener) {
             super(itemView);
 
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);

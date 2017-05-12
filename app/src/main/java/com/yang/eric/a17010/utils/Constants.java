@@ -26,7 +26,9 @@ public class Constants {
     public static final String CHECK_COED = "check_code";
     public static final String USERNAME = "username";
 
-
+    public static final int TYPE_DEPARTMENTS = 0;
+    public static final int TYPE_DIVIDER = 1;
+    public static final int TYPE_EMPLOYEES = 2;
 
 
     //激活key

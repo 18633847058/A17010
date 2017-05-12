@@ -598,7 +598,7 @@ public class DemoMapView extends MapView {
 	}
     private float pixel2Meter(int pixel) {
 	    int pixelPer1000 = mRenderer.meter2Pixel(1000);
-        float f = 1000/pixelPer1000;
+        float f = 1000f/ ((float) pixelPer1000);
         return  f*pixel;
     }
 

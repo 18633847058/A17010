@@ -38,4 +38,5 @@
     <string name="new_message">新短信</string>
     <string name="receiver">收件人</string>
     <string name="contact">通讯录</string>
+    <string name="title_activity_contact">ContactActivity</string>
 </resources>

@@ -91,6 +91,7 @@ public class MessageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+                startActivity(new Intent(this,ContactActivity.class));
                 break;
             case android.R.id.home:
                 onBackPressed();
