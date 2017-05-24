@@ -203,6 +203,8 @@ public class MapsFragment extends Fragment implements View.OnClickListener, View
                     renderer = mapView.getMapRenderer();
                     renderer.setDataMode(MapRenderer.DataMode.online);
                     renderer.setZoomLevel(12);
+                    initNavi();
+                    initQuery();
                     break;
                 case 100:
                     // 监听地图缩放 修改按钮状态

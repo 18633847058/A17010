@@ -1,5 +1,6 @@
 package com.yang.eric.a17010.protocol.config;
 
+import com.yang.eric.a17010.beans.Location;
 import com.yang.eric.a17010.utils.LogUtils;
 import com.yang.eric.a17010.utils.TransformUtils;
 
@@ -26,7 +27,7 @@ public class Inspection {
     //2B 巡检轨迹的数量
     private int number;
     //巡检轨迹信息
-    private List<Position> positions;
+    private List<Location> locations;
 
     public void decode(byte[] bytes) {
         try {
@@ -41,12 +42,12 @@ public class Inspection {
             setNumber(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,index,index + 2)));
             index += 2;
             for (int i = 0; i < number; i++) {
-                Position p = new Position();
-                p.setLongitude(TransformUtils.byte4ToInt(Arrays.copyOfRange(bytes,index,index + 4)));
+                Location l = new Location();
+                l.setLongitude(TransformUtils.byte4ToInt(Arrays.copyOfRange(bytes,index,index + 4)));
                 index += 4;
-                p.setLatitude(TransformUtils.byte4ToInt(Arrays.copyOfRange(bytes,index,index + 4)));
+                l.setLatitude(TransformUtils.byte4ToInt(Arrays.copyOfRange(bytes,index,index + 4)));
                 index += 4;
-                positions.add(p);
+                locations.add(l);
                 LogUtils.e(REQUEST_RESPONSE_DECODE, "decode Inspection success!");
             }
         } catch (Exception e) {
@@ -87,12 +88,12 @@ public class Inspection {
         this.number = number;
     }
 
-    public List<Position> getPositions() {
-        return positions;
+    public List<Location> getLocations() {
+        return locations;
     }
 
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 
     public byte getNameLength() {

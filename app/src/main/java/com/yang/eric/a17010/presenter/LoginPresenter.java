@@ -53,8 +53,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void login(String username, String password) {
         if (!NetworkState.networkConnected(MapsApplication.getInstance())) {
-            view.showMessage("无法连接到网络!", false);
-            return;
+                view.showMessage("无法连接到网络!", false);
+                return;
         }
         if(checkInput(username,password)) {
             view.showLoading();

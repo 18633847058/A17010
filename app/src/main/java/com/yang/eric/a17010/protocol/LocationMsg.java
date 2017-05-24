@@ -1,7 +1,7 @@
 package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.MapsApplication;
-import com.yang.eric.a17010.protocol.config.Position;
+import com.yang.eric.a17010.beans.Location;
 import com.yang.eric.a17010.utils.TransformUtils;
 
 import java.util.ArrayList;
@@ -20,75 +20,47 @@ public class LocationMsg {
     private byte dataType;
     //位置数量  1字节 最多10个
     private byte dataNumber;
-
-    private List<Position> positions;
+    //位置集合
+    private ArrayList<Location> locations = new ArrayList<>();
     //校验值
     private byte checkNum;
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public byte getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(byte dataType) {
-        this.dataType = dataType;
-    }
-
-    public byte getDataNumber() {
-        return dataNumber;
-    }
-
-    public void setDataNumber(byte dataNumber) {
-        this.dataNumber = dataNumber;
-    }
-
-    public List<Position> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
-    }
-
-    public byte[] encode(List<Position> positions, byte dataType) {
+    public byte[] encode(ArrayList<Location> locations, byte dataType) {
         byte[] bytes;
-        number = 1;
-        dataNumber = 0;
         List<Byte> lists = new ArrayList<>();
         lists.add(type);
-        byte[] byteNumber = TransformUtils.intTobyte2(MapsApplication.i);
-        MapsApplication.i++;
+        number = MapsApplication.i ++;
+        byte[] byteNumber = TransformUtils.intTobyte2(number);
         lists.add(byteNumber[0]);
         lists.add(byteNumber[1]);
+        this.dataType = dataType;
         lists.add(dataType);
-        dataNumber = (byte) positions.size();
+        dataNumber = (byte) locations.size();
         lists.add(dataNumber);
-        for (Position p : positions) {
-            lists.add(p.getType());
-            String[] s = p.getDate().split("-");
+        for (Location l : locations) {
+            this.locations.add(l);
+            lists.add((byte) l.getType());
+            String[] s = l.getTime().split("-");
             for (int i = 0; i < s.length; i++) {
                 lists.add(Byte.valueOf(s[i]));
             }
-            byte[] longitude = TransformUtils.intTobyte4(p.getLongitude());
+            byte[] longitude = TransformUtils.intTobyte4(l.getLongitude());
             for (Byte b: longitude) {
                 lists.add(b);
             }
-            byte[] latitude = TransformUtils.intTobyte4(p.getLatitude());
+            byte[] latitude = TransformUtils.intTobyte4(l.getLatitude());
             for (Byte b: latitude) {
                 lists.add(b);
             }
-            byte[] speed = TransformUtils.intTobyte2(p.getSpeed());
+            byte[] altitude = TransformUtils.intTobyte2(l.getAltitude());
+            for (Byte b: altitude) {
+                lists.add(b);
+            }
+            byte[] speed = TransformUtils.intTobyte2(l.getSpeed());
             for (Byte b: speed) {
                 lists.add(b);
             }
-            byte[] direction = TransformUtils.intTobyte2(p.getDirection());
+            byte[] direction = TransformUtils.intTobyte2(l.getDirection());
             for (Byte b: direction) {
                 lists.add(b);
             }
@@ -100,5 +72,21 @@ public class LocationMsg {
         }
         bytes[lists.size()] = checkNum;
         return bytes;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public ArrayList<Location> getLocations() {
+        return locations;
+    }
+
+    public byte getDataType() {
+        return dataType;
     }
 }

@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class TreeNode {
     private Long pid;
     private int level;
     private int type;
+
+    //是否折叠
+    @Transient
+    private boolean isFold = true;
 
 
 

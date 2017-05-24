@@ -1,8 +1,8 @@
 package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.MapsApplication;
+import com.yang.eric.a17010.beans.Location;
 import com.yang.eric.a17010.beans.PunchInfo;
-import com.yang.eric.a17010.protocol.config.Position;
 import com.yang.eric.a17010.utils.TransformUtils;
 
 import java.util.ArrayList;
@@ -105,20 +105,20 @@ public class UploadMsg {
                     byteList.add(number[0]);
                     byteList.add(number[1]);
                 }
-                Position position = (Position) objects.get(i);
-                byte[] id = TransformUtils.longTobyte8(position.getId());
+                Location location = (Location) objects.get(i);
+                byte[] id = TransformUtils.longTobyte8(location.getId());
                 for (Byte b: id) {
                     byteList.add(b);
                 }
-                String[] s = position.getDate().split("-");
+                String[] s = location.getTime().split("-");
                 for (int j = 0; j < s.length; j++) {
                     byteList.add(Byte.valueOf(s[i]));
                 }
-                byte[] longitude = TransformUtils.intTobyte4(position.getLongitude());
+                byte[] longitude = TransformUtils.intTobyte4(location.getLongitude());
                 for (Byte b: longitude) {
                     byteList.add(b);
                 }
-                byte[] latitude = TransformUtils.intTobyte4(position.getLatitude());
+                byte[] latitude = TransformUtils.intTobyte4(location.getLatitude());
                 for (Byte b: latitude) {
                     byteList.add(b);
                 }

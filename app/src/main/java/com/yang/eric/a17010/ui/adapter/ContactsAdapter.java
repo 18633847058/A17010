@@ -65,7 +65,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 break;
             case Constants.TYPE_EMPLOYEES:
                 if (!employees.isEmpty()) {
-                    TreeNode e = departments.get(position - departments.size() - 1);
+                    TreeNode e = employees.get(position - departments.size() - 1);
                     ((EmployeesViewHolder) holder).tvName.setText(e.getName());
                 }
                 break;

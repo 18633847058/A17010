@@ -33,9 +33,13 @@ public class TransformUtils {
     }
 
     public static byte[] intTobyte2(int i) {
+        int tmp = Math.abs(i);
         byte[] data = new byte[2];
-        data[1] = (byte) (i & 0xFF);
-        data[0] = (byte) ((i >> 8) & 0xFF);
+        data[1] = (byte) (tmp & 0xFF);
+        data[0] = (byte) ((tmp >> 8) & 0xFF);
+        if (i<0) {
+            data[0] |= 0x80;
+        }
         return data;
     }
 
@@ -59,11 +63,15 @@ public class TransformUtils {
     }
 
     public static byte[] intTobyte4(int i) {
+        int tmp = Math.abs(i);
         byte[] data = new byte[4];
-        data[3] = (byte) (i & 0xFF);
-        data[2] = (byte) ((i >> 8) & 0xFF);
-        data[1] = (byte) ((i >> 16) & 0xFF);
-        data[0] = (byte) ((i >> 24) & 0xFF);
+        data[3] = (byte) (tmp & 0xFF);
+        data[2] = (byte) ((tmp >> 8) & 0xFF);
+        data[1] = (byte) ((tmp >> 16) & 0xFF);
+        data[0] = (byte) ((tmp >> 24) & 0xFF);
+        if (i<0) {
+            data[0] |= 0x80;
+        }
         return data;
     }
     public static byte[] longTobyte8(long num) {
@@ -72,5 +80,9 @@ public class TransformUtils {
             data[i] = (byte)(num >>>(56-(i*8)));
         }
         return data;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(intTobyte2(-36000));
     }
 }

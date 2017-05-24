@@ -28,7 +28,7 @@ public class LoginMsg{
 
         byte[] arr = TransformUtils.hexStringToBytes(getID()) ;
         System.arraycopy(arr, 0, bytes, index , arr.length);
-        index += 16 ;
+        index += 16;
 
         try {
             System.arraycopy(getUsername().getBytes("gb2312"), 0, bytes, index , getUsername().getBytes("gb2312").length);

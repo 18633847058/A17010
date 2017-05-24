@@ -1,5 +1,6 @@
 package com.yang.eric.a17010.contract;
 
+import com.baidu.location.BDLocation;
 import com.yang.eric.a17010.presenter.BasePresenter;
 import com.yang.eric.a17010.ui.BaseView;
 
@@ -10,6 +11,9 @@ import com.yang.eric.a17010.ui.BaseView;
 public interface MainContract {
     interface Presenter extends BasePresenter {
         void sendAuth();
+        void sendLocation(BDLocation location);
+        void reSend();
+        void request();
         void receive(byte[] message);
         void wipeData();
         void disconnect();

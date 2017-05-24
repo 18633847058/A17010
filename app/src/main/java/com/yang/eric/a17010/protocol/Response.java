@@ -1,6 +1,9 @@
 package com.yang.eric.a17010.protocol;
 
 import com.yang.eric.a17010.utils.LogUtils;
+import com.yang.eric.a17010.utils.TransformUtils;
+
+import java.util.Arrays;
 
 import static com.yang.eric.a17010.utils.Constants.LOGIN_RESPONSE_DECODE;
 
@@ -11,7 +14,7 @@ import static com.yang.eric.a17010.utils.Constants.LOGIN_RESPONSE_DECODE;
 public class Response {
 
     private byte type = 0x00;
-    private byte number = 0x01;
+    private int number;
     private byte responseType;
     //0x00 成功 0x01 失败
     private byte result;
@@ -21,7 +24,8 @@ public class Response {
         for (int i = 0; i < bytes.length - 1; i++) {
             checkNum ^= bytes[i];
         }
-        if (bytes.length == 6 && type == bytes[0] && checkNum == bytes[bytes.length - 1] && number == bytes[2]) {
+        if (bytes.length == 6 && type == bytes[0] && checkNum == bytes[bytes.length - 1]) {
+            setNumber(TransformUtils.byte2ToInt(Arrays.copyOfRange(bytes,1,3)));
             setResponseType(bytes[3]);
             setResult(bytes[4]);
             LogUtils.e(LOGIN_RESPONSE_DECODE, "decode success!");
@@ -39,11 +43,11 @@ public class Response {
         this.type = type;
     }
 
-    public byte getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(byte number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 

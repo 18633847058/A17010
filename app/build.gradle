@@ -30,6 +30,7 @@ dependencies {
     compile files('libs/com_mapbar_navicore_mapdal.jar')
     compile files('libs/com_mapbar_navicore_navi.jar')
     compile files('libs/com_mapbar_navicore_poiquery.jar')
+    compile files('libs/BaiduLBS_Android.jar')
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'

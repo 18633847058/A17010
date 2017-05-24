@@ -79,19 +79,22 @@ public class ContactPresenter implements ContactContract.Presenter {
         switch (type) {
             case Constants.TYPE_DEPARTMENTS:
                 TreeNode d = departments.get(position);
-                tree = d.getChildren();
                 view.notifyDataChanged(d);
                 break;
             case Constants.TYPE_EMPLOYEES:
                 TreeNode e = employees.get(position - departments.size() - 1);
                 //跳转到通讯录详情界面
-
+                view.showMessage(e.getName());
         }
     }
 
     @Override
     public void setRoot(TreeNode root) {
-        tree = root.getChildren();
+        if (root == null) {
+            tree = null;
+        } else {
+            tree = root.getChildren();
+        }
     }
 
     @Override
